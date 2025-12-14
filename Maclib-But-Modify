@@ -70,36 +70,6 @@ local function GetGui()
 	return newGui
 end
 
-local IconList = loadstring(game:HttpGet('https://raw.githubusercontent.com/Dummyrme/Library/refs/heads/main/Icon.lua'))()
-function gl(i)
-    local iconData = IconList.Icons[i]
-    if iconData then
-        local spriteSheet = IconList.Spritesheets[tostring(iconData.Image)]
-        if spriteSheet then
-            return {
-                Image = spriteSheet,
-                ImageRectSize = iconData.ImageRectSize,
-                ImageRectPosition = iconData.ImageRectPosition,
-            }
-        end
-    end
-    if type(i) == 'string' and not i:find('rbxassetid://') then
-        return {
-            Image = "rbxassetid://".. i,
-            ImageRectSize = Vector2.new(0, 0),
-            ImageRectPosition = Vector2.new(0, 0),
-        }
-    elseif type(i) == 'number' then
-        return {
-            Image = "rbxassetid://".. i,
-            ImageRectSize = Vector2.new(0, 0),
-            ImageRectPosition = Vector2.new(0, 0),
-        }
-    else
-        return i
-    end
-end
-
 local function Tween(instance, tweeninfo, propertytable)
 	return TweenService:Create(instance, tweeninfo, propertytable)
 end
@@ -1465,11 +1435,42 @@ function MacLib:Window(Settings)
 			local tabImage
 
 			if Settings.Image then
+
+                local IconList = loadstring(game:HttpGet('https://raw.githubusercontent.com/Dummyrme/Library/refs/heads/main/Icon.lua'))()
+                function gl(i)
+                    local iconData = IconList.Icons[i]
+                    if iconData then
+                        local spriteSheet = IconList.Spritesheets[tostring(iconData.Image)]
+                        if spriteSheet then
+                            return {
+                                Image = spriteSheet,
+                                ImageRectSize = iconData.ImageRectSize,
+                                ImageRectPosition = iconData.ImageRectPosition,
+                            }
+                        end
+                    end
+                    if type(i) == 'string' and not i:find('rbxassetid://') then
+                        return {
+                            Image = "rbxassetid://".. i,
+                            ImageRectSize = Vector2.new(0, 0),
+                            ImageRectPosition = Vector2.new(0, 0),
+                        }
+                    elseif type(i) == 'number' then
+                        return {
+                            Image = "rbxassetid://".. i,
+                            ImageRectSize = Vector2.new(0, 0),
+                            ImageRectPosition = Vector2.new(0, 0),
+                        }
+                    else
+                        return i
+                    end
+                end
+
 				tabImage = Instance.new("ImageLabel")
 				tabImage.Name = "TabImage"
-				tabImage.Image = gl(Settings.Image).Image
-                tabImage.ImageRectSize = gl(Settings.Image).ImageRectSize
-                tabImage.ImageRectOffset = gl(Settings.Image).ImageRectPosition
+				tabImage.Image = gl(tostring(Settings.Image)).Image
+                tabImage.ImageRectSize = gl(tostring(Settings.Image)).ImageRectSize
+                tabImage.ImageRectOffset = gl(tostring(Settings.Image)).ImageRectPosition
 				tabImage.ImageTransparency = 0.5
 				tabImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				tabImage.BackgroundTransparency = 1
