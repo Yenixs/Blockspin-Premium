@@ -870,7 +870,7 @@ function MacLib:Window(Settings)
 	currentTab.Name = "CurrentTab"
 	currentTab.FontFace = Font.new(assets.interFont)
 	currentTab.RichText = true
-	currentTab.Text = ""
+	currentTab.Text = "Yenix Hub              Blockspin Edition"
 	currentTab.RichText = true
 	currentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 	currentTab.TextSize = 15
@@ -4664,7 +4664,7 @@ function MacLib:Window(Settings)
 
 				tabs[tabSwitcher].tabContent.Parent = content
 				currentTabInstance = tabs[tabSwitcher].tabContent
-				currentTab.Text = Settings.Name
+				currentTab.Text = "Yenix Hub              Blockspin Edition"
 			end
 
 			tabSwitcher.MouseButton1Click:Connect(function()
