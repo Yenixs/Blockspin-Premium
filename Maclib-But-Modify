@@ -650,6 +650,7 @@ function MacLib:Window(Settings)
 
 	local content = Instance.new("Frame")
 	content.Name = "Content"
+    content.Visible = false
 	content.AnchorPoint = Vector2.new(1, 0)
 	content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	content.BackgroundTransparency = 1
@@ -721,17 +722,6 @@ function MacLib:Window(Settings)
 	topbar.BorderSizePixel = 0
 	topbar.Size = UDim2.new(1, 0, 0, 63)
 
-	local divider4 = Instance.new("Frame")
-	divider4.Name = "Divider"
-	divider4.AnchorPoint = Vector2.new(0, 1)
-	divider4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	divider4.BackgroundTransparency = 0.9
-	divider4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	divider4.BorderSizePixel = 0
-	divider4.Position = UDim2.fromScale(0, 1)
-	divider4.Size = UDim2.new(1, 0, 0, 1)
-	divider4.Parent = topbar
-
 	local elements = Instance.new("Frame")
 	elements.Name = "Elements"
 	elements.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -745,20 +735,6 @@ function MacLib:Window(Settings)
 	uIPadding2.PaddingLeft = UDim.new(0, 20)
 	uIPadding2.PaddingRight = UDim.new(0, 20)
 	uIPadding2.Parent = elements
-
-	local Icon = Instance.new("ImageButton")
-	Icon.Name = "Icon"
-	Icon.Image = "rbxassetid://103816145608946"
-	Icon.ImageTransparency = 0.7
-	Icon.AnchorPoint = Vector2.new(1, 0.5)
-	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Icon.BackgroundTransparency = 1
-	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Icon.BorderSizePixel = 0
-	Icon.Position = UDim2.fromScale(1, 0.5)
-	Icon.Size = UDim2.fromOffset(15, 15)
-	Icon.Parent = elements
-	Icon.Visible = true
 
 	local dragging_ = false
 	local dragInput
@@ -811,28 +787,6 @@ function MacLib:Window(Settings)
 			end
 		end)
 	end
-
-	local currentTab = Instance.new("TextLabel")
-	currentTab.Name = "CurrentTab"
-	currentTab.FontFace = Font.new(assets.interFont)
-	currentTab.RichText = true
-	currentTab.Text = "Yenix Hub                                                      Blockspin Edition"
-	currentTab.RichText = true
-	currentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-	currentTab.TextSize = 15
-	currentTab.TextTransparency = 0.5
-	currentTab.TextTruncate = Enum.TextTruncate.SplitWord
-	currentTab.TextXAlignment = Enum.TextXAlignment.Left
-	currentTab.TextYAlignment = Enum.TextYAlignment.Top
-	currentTab.AnchorPoint = Vector2.new(0, 0.5)
-	currentTab.AutomaticSize = Enum.AutomaticSize.Y
-	currentTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	currentTab.BackgroundTransparency = 1
-	currentTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	currentTab.BorderSizePixel = 0
-	currentTab.Position = UDim2.fromScale(0, 0.5)
-	currentTab.Size = UDim2.fromScale(0.9, 0)
-	currentTab.Parent = elements
 
 	elements.Parent = topbar
 
@@ -4610,7 +4564,6 @@ function MacLib:Window(Settings)
 
 				tabs[tabSwitcher].tabContent.Parent = content
 				currentTabInstance = tabs[tabSwitcher].tabContent
-				currentTab.Text = "Yenix Hub                                                      Blockspin Edition"
 			end
 
 			tabSwitcher.MouseButton1Click:Connect(function()
