@@ -1469,7 +1469,7 @@ function MacLib:Window(Settings)
 				tabImage.Name = "TabImage"
 				tabImage.Image = gl(Settings.Image).Image
                 tabImage.ImageRectSize = gl(Settings.Image).ImageRectSize
-                tabImage.ImageRectOffset = gl(Settings.Image).ImageRectOffset
+                tabImage.ImageRectOffset = gl(Settings.Image).ImageRectPosition
 				tabImage.ImageTransparency = 0.5
 				tabImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				tabImage.BackgroundTransparency = 1
