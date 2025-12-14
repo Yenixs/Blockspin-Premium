@@ -1733,8 +1733,8 @@ function MacLib:Window(Settings)
 						}):Play()
 
 						ToggleFunctions.State = State
-						if callback then
-							callback(togglebool)
+						if typeof(callback) == "function" then
+							task.spawn(callback, State)
 						end
 					end
 
