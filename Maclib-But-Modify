@@ -1911,7 +1911,7 @@ function MacLib:Window(Settings)
 						end,
 						Percent = function(sliderValue, precision)
 							local percentage = (sliderValue - SliderFunctions.Settings.Minimum) / (SliderFunctions.Settings.Maximum - SliderFunctions.Settings.Minimum) * 100
-							return precision and string.format("%." .. precision .. "f", percentage) .. "%" or tostring(math.round(percentage)) .. "%"
+							return precision and string.format("%." .. precision .. "f", percentage) or tostring(math.round(percentage))
 						end,
 						Value = function(sliderValue, precision)
 							return precision and string.format("%." .. precision .. "f", sliderValue) or tostring(sliderValue)
