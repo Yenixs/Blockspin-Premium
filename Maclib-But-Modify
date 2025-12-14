@@ -1734,12 +1734,11 @@ function MacLib:Window(Settings)
 
 						ToggleFunctions.State = State
 						if callback and typeof(callback) == "function" then
-							print(togglebool)
 							callback(togglebool)
 						end
 					end
 
-					NewState(togglebool)
+					NewState(togglebool, ToggleFunctions.Settings.Callback)
 
 					local function Toggle()
 						togglebool = not togglebool
