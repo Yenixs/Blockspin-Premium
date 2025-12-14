@@ -746,53 +746,19 @@ function MacLib:Window(Settings)
 	uIPadding2.PaddingRight = UDim.new(0, 20)
 	uIPadding2.Parent = elements
 
-	local moveIcon = Instance.new("ImageButton")
-	moveIcon.Name = "MoveIcon"
-	moveIcon.Image = assets.transform
-	moveIcon.ImageTransparency = 0.7
-	moveIcon.AnchorPoint = Vector2.new(1, 0.5)
-	moveIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	moveIcon.BackgroundTransparency = 1
-	moveIcon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	moveIcon.BorderSizePixel = 0
-	moveIcon.Position = UDim2.fromScale(1, 0.5)
-	moveIcon.Size = UDim2.fromOffset(15, 15)
-	moveIcon.Parent = elements
-	moveIcon.Visible = not Settings.DragStyle or Settings.DragStyle == 1
-
-	local interact = Instance.new("TextButton")
-	interact.Name = "Interact"
-	interact.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
-	interact.Text = ""
-	interact.TextColor3 = Color3.fromRGB(0, 0, 0)
-	interact.TextSize = 14
-	interact.AnchorPoint = Vector2.new(0.5, 0.5)
-	interact.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	interact.BackgroundTransparency = 1
-	interact.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	interact.BorderSizePixel = 0
-	interact.Position = UDim2.fromScale(0.5, 0.5)
-	interact.Size = UDim2.fromOffset(40, 40)
-	interact.Parent = moveIcon
-
-	local function ChangemoveIconState(State)
-		if State == "Default" then
-			Tween(moveIcon, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {
-				ImageTransparency = 0.7
-			}):Play()
-		elseif State == "Hover" then
-			Tween(moveIcon, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {
-				ImageTransparency = 0.4
-			}):Play()
-		end
-	end
-
-	interact.MouseEnter:Connect(function()
-		ChangemoveIconState("Hover")
-	end)
-	interact.MouseLeave:Connect(function()
-		ChangemoveIconState("Default")
-	end)
+	local Icon = Instance.new("ImageButton")
+	Icon.Name = "Icon"
+	Icon.Image = "rbxassetid://103816145608946"
+	Icon.ImageTransparency = 0.7
+	Icon.AnchorPoint = Vector2.new(1, 0.5)
+	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Icon.BackgroundTransparency = 1
+	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Icon.BorderSizePixel = 0
+	Icon.Position = UDim2.fromScale(1, 0.5)
+	Icon.Size = UDim2.fromOffset(15, 15)
+	Icon.Parent = elements
+	Icon.Visible = true
 
 	local dragging_ = false
 	local dragInput
@@ -824,27 +790,7 @@ function MacLib:Window(Settings)
 		end
 	end
 
-	if not Settings.DragStyle or Settings.DragStyle == 1 then
-		interact.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				onDragStart(input)
-			end
-		end)
-
-		interact.InputChanged:Connect(onDragUpdate)
-
-		UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging_ then
-				update(input)
-			end
-		end)
-
-		interact.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging_ = false
-			end
-		end)
-	elseif Settings.DragStyle == 2 then
+	if Settings.DragStyle == 2 then
 		base.InputBegan:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				onDragStart(input)
@@ -870,7 +816,7 @@ function MacLib:Window(Settings)
 	currentTab.Name = "CurrentTab"
 	currentTab.FontFace = Font.new(assets.interFont)
 	currentTab.RichText = true
-	currentTab.Text = "Yenix Hub              Blockspin Edition"
+	currentTab.Text = "Yenix Hub                                                      Blockspin Edition"
 	currentTab.RichText = true
 	currentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 	currentTab.TextSize = 15
@@ -4664,7 +4610,7 @@ function MacLib:Window(Settings)
 
 				tabs[tabSwitcher].tabContent.Parent = content
 				currentTabInstance = tabs[tabSwitcher].tabContent
-				currentTab.Text = "Yenix Hub              Blockspin Edition"
+				currentTab.Text = "Yenix Hub                                                      Blockspin Edition"
 			end
 
 			tabSwitcher.MouseButton1Click:Connect(function()
