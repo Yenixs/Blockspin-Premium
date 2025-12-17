@@ -45,7 +45,7 @@ Scripts.SC = function()
 	end
 
 	for k, v in pairs(Settings) do
-		_G[k] = v
+		getgenv()[k] = v
 	end
 end
 
@@ -54,7 +54,7 @@ Scripts.S = function()
 end
 
 Scripts.SG = function()
-	for k, v in pairs(_G) do
+	for k, v in pairs(getgenv()) do
 		if typeof(v) == "boolean" or typeof(v) == "string" or typeof(v) == "number" then
 			Settings[k] = v
 		end
