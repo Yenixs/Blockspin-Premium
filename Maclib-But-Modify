@@ -1746,7 +1746,7 @@ function MacLib:Window(Settings)
 					end
 
 					toggle1.MouseButton1Click:Connect(Toggle)
-
+					
 					function ToggleFunctions:Toggle()
 						Toggle()
 					end
@@ -1952,6 +1952,20 @@ function MacLib:Window(Settings)
 
 					SetValue(SliderFunctions.Settings.Default, true)
 
+					task.spawn(function()
+						local v = SliderFunctions.Settings.Default
+						SliderFunctions.Value = v
+						finalValue = v
+
+						if SliderFunctions.Settings.Callback then
+							SliderFunctions.Settings.Callback(v)
+						end
+
+						if SliderFunctions.Settings.onInputComplete then
+							SliderFunctions.Settings.onInputComplete(v)
+						end
+					end)
+
 					sliderHead.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							dragging = true
@@ -2011,6 +2025,7 @@ function MacLib:Window(Settings)
 
 					sliderName:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSliderBarSize)
 					section:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSliderBarSize)
+
 
 					function SliderFunctions:UpdateName(Name)
 						sliderName = Name
@@ -2169,6 +2184,16 @@ function MacLib:Window(Settings)
 					end)
 					InputBox.Text = InputFunctions.Settings.Default or ""
 					InputBox.PlaceholderText = InputFunctions.Settings.Placeholder or ""
+					
+					task.spawn(function()
+						local v = InputBox.Text
+
+						InputFunctions.Text = v
+
+						if InputFunctions.Settings.Callback then
+							InputFunctions.Settings.Callback(v)
+						end
+					end)
 
 					InputBox:GetPropertyChangedSignal("Text"):Connect(function()
 						InputBox.Text = AcceptedCharacters(InputBox.Text)
