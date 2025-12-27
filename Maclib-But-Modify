@@ -2869,7 +2869,11 @@ function MacLib:Window(Settings)
 							if DropdownFunctions.Settings.Multi then
 								DropdownFunctions.Settings.Callback(Selected)
 							else
-								DropdownFunctions.Settings.Callback(Selected[1] or nil)
+								if Selected[Default] then 
+									DropdownFunctions.Settings.Callback(Selected[Default])
+								else 
+									DropdownFunctions.Settings.Callback(Selected[1])
+								end 
 							end
 						end
 					end)
