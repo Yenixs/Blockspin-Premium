@@ -2819,14 +2819,22 @@ function MacLib:Window(Settings)
 						}
 
 						local isSelected = false
-						if DropdownFunctions.Settings.Default then
+
+						if DropdownFunctions.Settings.Default ~= nil then
 							if DropdownFunctions.Settings.Multi then
-								isSelected = table.find(DropdownFunctions.Settings.Default, v) and true or false
+								isSelected = table.find(DropdownFunctions.Settings.Default, v) ~= nil
 							else
-								isSelected = (DropdownFunctions.Settings.Default == i) and true or false
+								if type(DropdownFunctions.Settings.Default) == "number" then
+									isSelected = (DropdownFunctions.Settings.Default == i)
+								else
+									isSelected = (DropdownFunctions.Settings.Default == v)
+								end
 							end
 						end
-						Toggle(v, isSelected)
+
+						if isSelected then
+							Toggle(v, true)
+						end
 
 						local option = OptionObjs[v].Button
 
@@ -2840,15 +2848,15 @@ function MacLib:Window(Settings)
 
 							Toggle(v, newSelected)
 
-                            task.spawn(function()
+							task.spawn(function()
 								if not DropdownFunctions.Settings.Callback then return end
 
 								if DropdownFunctions.Settings.Multi then
-									DropdownFunctions.Settings.Callback(Selected)
+									DropdownFunctions.Settings.Callback(table.clone(Selected))
 								else
-									DropdownFunctions.Settings.Callback(Selected[1] or nil)
+									DropdownFunctions.Settings.Callback(Selected[Settings.Default])
 								end
-                            end)
+							end)
 						end)
 
 						if dropped then
@@ -2862,13 +2870,14 @@ function MacLib:Window(Settings)
 						end
 					end
 
+
 					task.spawn(function()
 						if not DropdownFunctions.Settings.Callback then return end
 
 						if DropdownFunctions.Settings.Multi then
-							DropdownFunctions.Settings.Callback(Selected)
+							DropdownFunctions.Settings.Callback(table.clone(Selected))
 						else
-							DropdownFunctions.Settings.Callback(Selected[1] or nil)
+							DropdownFunctions.Settings.Callback(Selected[Settings.Default])
 						end
 					end)
 
