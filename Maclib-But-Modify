@@ -2642,8 +2642,8 @@ function MacLib:Window(Settings)
 										opt.Checkmark.TextTransparency = 1
 									end
 								end
-								Selected = {optionName}
-								DropdownFunctions.Value = Selected[1]
+								Selected = { optionName }
+								DropdownFunctions.Value = optionName
 							end
 							Tween(checkmark, TweenInfo.new(tweensettings.duration, tweensettings.easingStyle), {
 								Size = UDim2.new(checkmark.Size.X.Scale, tweensettings.checkSizeIncrease, checkmark.Size.Y.Scale, checkmark.Size.Y.Offset)
@@ -2841,15 +2841,13 @@ function MacLib:Window(Settings)
 							Toggle(v, newSelected)
 
                             task.spawn(function()
-                                if DropdownFunctions.Settings.Multi then
-                                    if DropdownFunctions.Settings.Callback then
-                                        DropdownFunctions.Settings.Callback(Selected)
-                                    end
-                                else
-                                    if newSelected and DropdownFunctions.Settings.Callback then
-                                        DropdownFunctions.Settings.Callback(Selected[1] or nil)
-                                    end
-                                end
+								if not DropdownFunctions.Settings.Callback then return end
+
+								if DropdownFunctions.Settings.Multi then
+									DropdownFunctions.Settings.Callback(Selected)
+								else
+									DropdownFunctions.Settings.Callback(Selected[1] or nil)
+								end
                             end)
 						end)
 
@@ -2864,17 +2862,13 @@ function MacLib:Window(Settings)
 						end
 					end
 
-					task.defer(function()
-						if DropdownFunctions.Settings.Callback then
-							if DropdownFunctions.Settings.Multi then
-								DropdownFunctions.Settings.Callback(Selected)
-							else
-								if Selected[Default] then 
-									DropdownFunctions.Settings.Callback(Selected[Default])
-								else 
-									DropdownFunctions.Settings.Callback(Selected[1])
-								end 
-							end
+					task.spawn(function()
+						if not DropdownFunctions.Settings.Callback then return end
+
+						if DropdownFunctions.Settings.Multi then
+							DropdownFunctions.Settings.Callback(Selected)
+						else
+							DropdownFunctions.Settings.Callback(Selected[1] or nil)
 						end
 					end)
 
