@@ -2836,6 +2836,16 @@ function MacLib:Window(Settings)
 							Toggle(v, true)
 						end
 
+						task.spawn(function()
+							if not DropdownFunctions.Settings.Callback then return end
+
+							if DropdownFunctions.Settings.Multi then
+								DropdownFunctions.Settings.Callback(table.clone(Selected))
+							else
+								DropdownFunctions.Settings.Callback(Selected[Settings.Default])
+							end
+						end)
+
 						local option = OptionObjs[v].Button
 
 						option.MouseButton1Click:Connect(function()
