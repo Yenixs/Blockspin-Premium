@@ -1154,7 +1154,7 @@ function MacLib:Window(Settings)
 			Enum.FontWeight.Medium,
 			Enum.FontStyle.Normal
 		)
-		checkmark.Text = "âœ“"
+		checkmark.Text = "✓"
 		checkmark.TextColor3 = Color3.fromRGB(255, 255, 255)
 		checkmark.TextSize = 13
 		checkmark.TextTransparency = 1
@@ -2765,7 +2765,7 @@ function MacLib:Window(Settings)
 						local checkmark = Instance.new("TextLabel")
 						checkmark.Name = "Checkmark"
 						checkmark.FontFace = Font.new(assets.interFont)
-						checkmark.Text = "âœ“"
+						checkmark.Text = "•"
 						checkmark.TextColor3 = Color3.fromRGB(255, 255, 255)
 						checkmark.TextSize = 13
 						checkmark.TextTransparency = 1
@@ -4872,7 +4872,7 @@ function MacLib:Window(Settings)
 		local interactable = Instance.new("TextButton")
 		interactable.Name = "Interactable"
 		interactable.FontFace = Font.new(assets.interFont)
-		interactable.Text = "âœ“"
+		interactable.Text = "✓"
 		interactable.TextColor3 = Color3.fromRGB(255, 255, 255)
 		interactable.TextSize = 17
 		interactable.TextTransparency = 0.2
@@ -4906,8 +4906,8 @@ function MacLib:Window(Settings)
 
 		local styles = {
 			None = function() interactable:Destroy() end,
-			Confirm = function() interactable.Text = "âœ“" end,
-			Cancel = function() interactable.Text = "âœ—" end
+			Confirm = function() interactable.Text = "✓" end,
+			Cancel = function() interactable.Text = "✗" end
 		}
 
 		local style = styles[Settings.Style] or function() interactable:Destroy() end
