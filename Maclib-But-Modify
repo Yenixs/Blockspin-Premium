@@ -46,9 +46,7 @@ local assets = {
 
 --// Functions
 local function GetGui()
-	local parent = LocalPlayer:FindFirstChild("PlayerGui")
-		or (gethui and gethui())
-		or (cloneref and cloneref(MacLib.GetService("CoreGui")) or MacLib.GetService("CoreGui"))
+	local parent = MacLib.GetService("CoreGui") or LocalPlayer:FindFirstChild("PlayerGui")
 
     if parent then 
         if parent:FindFirstChild("MacLibGui") then
